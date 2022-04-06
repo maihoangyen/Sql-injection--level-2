@@ -97,7 +97,7 @@
     
  - Ta test thử form đăng nhập với `username` và `password` đúng:
  
-   ![image](https://user-images.githubusercontent.com/101852647/162029823-47b62bd2-a9fb-43a8-a933-53e0614cb9b2.png)
+   ![image](https://user-images.githubusercontent.com/101852647/162034336-004ebb44-6497-4820-a615-c673ae826585.png)
    
    ![image](https://user-images.githubusercontent.com/101852647/162030573-546d3a0f-4ad6-496e-b3aa-fbe4f3b5ff0e.png)
 
