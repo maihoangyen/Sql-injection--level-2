@@ -91,4 +91,46 @@
 <br> 3.1 Code sửa lỗi sqli cho level2 <a name="kn"></a></br>
 
 <br> 3.2 Code sửa lỗi sqli cho level1 <a name="kn"></a></br>
+ - Đây là code có lỗi sqli:
+ 
+    ![image](https://user-images.githubusercontent.com/101852647/162029521-874db98a-9d03-4de8-a275-68ac6a233767.png)
+    
+ - Ta test thử form đăng nhập với `username` và `password` đúng:
+ 
+   ![image](https://user-images.githubusercontent.com/101852647/162029823-47b62bd2-a9fb-43a8-a933-53e0614cb9b2.png)
+   
+   ![image](https://user-images.githubusercontent.com/101852647/162030573-546d3a0f-4ad6-496e-b3aa-fbe4f3b5ff0e.png)
+
+- Tiếp theo, ta thử nhập `username` với tên là `'or true #` thì nó vẫn đăng nhập được:
+
+  ![image](https://user-images.githubusercontent.com/101852647/162030773-9191bb97-bdb9-4b7c-82bf-51614b712ce9.png)
+  
+  ![image](https://user-images.githubusercontent.com/101852647/162030814-0d0653a0-0982-4f4e-8c00-4d4b29da2ba0.png)
+
+- Hoặc ta chèn `'or 'a'=a` nó cũng cho đăng nhập thành công:
+
+  ![image](https://user-images.githubusercontent.com/101852647/162031017-470348d4-01e4-4843-9745-33b09b345ee9.png)
+  
+  ![image](https://user-images.githubusercontent.com/101852647/162031055-1065b78c-a2c4-4f68-ba59-6fad846a1665.png)
+
+- Nhưng khi kiểm tra lại trong Database lại không có tên user đó:
+
+  ![image](https://user-images.githubusercontent.com/101852647/162032015-eca1bb36-de40-43b6-bdd9-728d73ec34e2.png)
+
+- Ta tiến hành chỉnh sửa code để khắc phục sqli:
+ - Sử dụng những câu lệnh được tham số hóa:
+
+   ![image](https://user-images.githubusercontent.com/101852647/162032811-d4fad498-3119-40e8-bd46-5bbc85a1a1ef.png)
+  
+  - Sau khi thử lại với `'or true #` hoặc  `'or 'a'=a` nó cũng không cho đăng nhập:
+  
+   ![image](https://user-images.githubusercontent.com/101852647/162033174-413f08f7-9347-4c31-8bec-b7be7f7dddc3.png)
+ 
+ - Sử dụng hàm `mysqli_real_escape_string()`:
+
+  ![image](https://user-images.githubusercontent.com/101852647/162033367-0b19509e-c019-4b4a-bf11-767c61b56649.png)
+
+
+
+
 
