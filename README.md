@@ -10,3 +10,8 @@
  
 ### Nội dung báo cáo 
 #### 1. Khai thác sqli level2 <a name="gioithieu"></a>
+
+#### 1. Code mô phỏng lỗi <a name="gioithieu"></a>
+
+#### 1. Code sửa lỗi sqli cho level2 và level1 <a name="gioithieu"></a>
+
