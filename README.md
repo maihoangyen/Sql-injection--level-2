@@ -12,12 +12,14 @@
 #### 1. Khai thác sqli level2 <a name="gioithieu"></a>
  - B1: Sử dụng `netdiscover` để quét Giao thức ARP và nhận các thiết bị trên Mạng LAN Chúng ta có thể thấy rằng IP thứ ba là IP mong muốn và IP thứ hai là IP Kali của chúng ta
  
-     ![image](https://user-images.githubusercontent.com/101852647/162014093-0980aab0-9ec5-4cf1-a4a7-5fe324b6b38d.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162161017-e3d3f2d7-7a10-4490-9348-e5ce7c6378fc.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162161080-8b39fe9c-6d5c-4f6e-b87b-e69c0636687f.png)
  
  - B2:Bây giờ sử dụng nmap để tìm ra các cổng đang mở. Ta sẽ thấy cổng 80 đang mở.
  
-     ![image](https://user-images.githubusercontent.com/101852647/162014392-8e3c3e63-18d9-40f7-a664-fd449050c1c4.png)
-
+     ![image](https://user-images.githubusercontent.com/101852647/162161149-4caf7710-31c8-4c4c-a375-30e68bd76935.png)
+     
  - B3: Mở trang web lên và nhấn vào test bây giờ chúng ta sẽ test thử xem nó có url có dễ bị chèn sqli hay không bằng cách thêm `?id=1'` thì thấy không có hiện tượng gì chứng tỏ trang web này không dễ bị chèn sqli. Vì vậy chúng ta sẽ khai thác sql mù dựa trên việc thực thi mã từ xa bằng cách sử dụng một webshell php.
  
      ![image](https://user-images.githubusercontent.com/101852647/162015980-bdc27640-da14-4d99-876c-7507aa24229d.png)
@@ -55,19 +57,21 @@
      
  - B9: Sau đó, ta sử dụng `ExifTool` để liên kết một tệp php độc hại sẽ tạo ra lỗ hổng thực thi mã từ xa. Ta sẽ tải 1 file ảnh với tên là `img.png` và sao chép nó vào trong file `simple-backdoor.php` từ đường dẫn `/ usr / share / webshells / php `
  
-     ![image](https://user-images.githubusercontent.com/101852647/162020135-98df924b-fb1b-4ad9-a618-2e138b5c7454.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162161293-29f94981-c5c2-43b6-9f04-384356cc135d.png)
      
-     ![image](https://user-images.githubusercontent.com/101852647/162020213-e37aab41-c7af-4194-b660-5c88da062734.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162161358-af71eeec-7e5d-4048-8206-f40ed66594fb.png)
      
-     ![image](https://user-images.githubusercontent.com/101852647/162020337-5626efcb-c544-4631-abe4-9f3b2ee87206.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162161484-afef8ec1-375d-4116-b6f6-6efd5f6dcf84.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162161553-9a4cfac0-94b9-4367-8ab7-7ffbdc586757.png)
 
  - B10: Bây giờ gõ lệnh cho `ExifTool` để ẩn mã độc của tệp php bên trong hình ảnh png bằng lệnh `exiftool "-comment <= simple-backdoor.php" img.png `
  
-     ![image](https://user-images.githubusercontent.com/101852647/162020722-4a15a8db-6214-4cb6-a558-b786805b9b19.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162161620-1090e1d7-89e5-40f5-8597-f396f6cde245.png)
     
  - B11: Tiếp theo ta sẽ kiểm tra thông tin của hình ảnh bằng lệnh `exiftool img.png`. Như chúng ta có thể quan sát, mã độc được ẩn bên trong hình ảnh
  
-     ![image](https://user-images.githubusercontent.com/101852647/162021212-1b8e0bd0-135e-457b-9151-fdddcaf11bc8.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162161675-330d9dc4-1fd6-428b-873c-2f1409dee8dc.png)
      
  - B12: Bây giờ chúng ta tải ảnh có ẩn mã đọc bên trong lên trang web cũng chính là cái webshell php của chúng ta
 
@@ -75,7 +79,7 @@
 
  - B13: file ảnh đã tải thành công bây giờ chúng ta sẽ nhấn vào backdoor và bắt đầu thực thi nó
 
-     ![image](https://user-images.githubusercontent.com/101852647/162023190-e558d0be-35bc-4e70-b784-18b471a911a9.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162161788-ff33297f-53e5-4920-85f9-b32f664bc405.png)
 
  - B14: Bây giờ chúng ta mở mã nguồn nó lên và kiểm tra xem hình ảnh được tải lên liên kết chưa. Như chúng ta thấy thì chúng ta đã tìm thấy liên kết và mở nó lên.
  
