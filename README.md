@@ -75,19 +75,29 @@
      
  - B12: Bây giờ chúng ta tải ảnh có ẩn mã đọc bên trong lên trang web cũng chính là cái webshell php của chúng ta
 
-     ![image](https://user-images.githubusercontent.com/101852647/162022504-3f5eac14-6994-423c-a22e-11e885f301e2.png)
-
+     ![image](https://user-images.githubusercontent.com/101852647/162162220-e81d8a25-dc60-4c7e-a61b-3531b8646c3d.png)
+     
  - B13: file ảnh đã tải thành công bây giờ chúng ta sẽ nhấn vào backdoor và bắt đầu thực thi nó
 
-     ![image](https://user-images.githubusercontent.com/101852647/162161788-ff33297f-53e5-4920-85f9-b32f664bc405.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162162284-0c35a439-429c-455a-b42e-9ac0b7cc5199.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162162352-6683c2db-9594-411b-ad73-676d94ac47e2.png)
 
  - B14: Bây giờ chúng ta mở mã nguồn nó lên và kiểm tra xem hình ảnh được tải lên liên kết chưa. Như chúng ta thấy thì chúng ta đã tìm thấy liên kết và mở nó lên.
  
-     ![image](https://user-images.githubusercontent.com/101852647/162023611-4e3d3896-2c8a-42b0-9a27-e9ac8ccc9207.png)
+     ![image](https://user-images.githubusercontent.com/101852647/162162468-8f738285-9360-43f3-b226-4f493eabb764.png)
  
  - B15: Như chúng ta đã biết hình ảnh chứa một trình bao web sẽ cho phép thực thi mã từ xa. Do đó, sau khi khám phá đường dẫn được liệt kê ở trên, ta lấy tệp `/ etc / passwd`
+  
+     ![image](https://user-images.githubusercontent.com/101852647/162162559-36b513b5-d2bc-4eca-9028-282b525775c3.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162162584-c9718e4a-6dd5-4b9e-bf38-33fd4e529c22.png)
+     
+ - B16: Bây giờ, chạy trình lắng nghe netcat trong thiết bị đầu cuối và thực hiện kết nối ngược lại netcat để tạo web shell
  
- 
+     ![image](https://user-images.githubusercontent.com/101852647/162162866-3a07624f-1f17-4f65-93a9-04e8cd54319a.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162162960-f6d9aed0-059a-48be-9893-4d170cb42459.png)
 
 #### 2. Code mô phỏng lỗi <a name="gioithieu"></a>
 
