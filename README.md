@@ -4,13 +4,23 @@
  ### MỤC LỤC
  1. [Khai thác sqli level2](#gioithieu)
  
- 2. [Code mô phỏng lỗi](#tha) 
+     1.1 [Phương pháp manual](#tc)
+      
+     1.2 [Phương pháp sử dụng sqlmap](#pp)
+ 
+ 2. [Code mô phỏng lỗi](#mp) 
        
- 3. [Code sửa lỗi sqli cho level2 và level1](#ths)
+ 3. [Code sửa lỗi sqli cho level2 và level1](#lv)
+
+     3.1 [Code sửa lỗi sqli cho level2](#code1)
+      
+     3.2 [Code sửa lỗi sqli cho level1](#code2)
+     
+     3.3 [Các hàm sử dụng](#chsd)
  
 ### Nội dung báo cáo 
 #### 1. Khai thác sqli level2 <a name="gioithieu"></a>
-<br> 1.1 Phương Pháp manual <a name="kni"></a></br>
+<br> 1.1 Phương Pháp manual <a name="tc"></a></br>
  - B1: Sử dụng `netdiscover` để quét Giao thức ARP và nhận các thiết bị trên Mạng LAN Chúng ta có thể thấy rằng IP thứ ba là IP mong muốn và IP thứ hai là IP Kali của chúng ta
  
      ![image](https://user-images.githubusercontent.com/101852647/162161017-e3d3f2d7-7a10-4490-9348-e5ce7c6378fc.png)
@@ -104,7 +114,7 @@
     ![image](https://user-images.githubusercontent.com/101852647/162162960-f6d9aed0-059a-48be-9893-4d170cb42459.png)
 
 
-<br> 1.2 Phương Pháp sử dụng công cụ sqlmap <a name="kni"></a></br>
+<br> 1.2 Phương Pháp sử dụng công cụ sqlmap <a name="pp"></a></br>
  - B1: Sử dụng `netdiscover` để quét Giao thức ARP và nhận các thiết bị trên Mạng LAN Chúng ta có thể thấy rằng IP thứ ba là IP mong muốn và IP thứ hai là IP Kali của chúng ta
  
      ![image](https://user-images.githubusercontent.com/101852647/162161017-e3d3f2d7-7a10-4490-9348-e5ce7c6378fc.png)
@@ -139,18 +149,32 @@
      
  - B7: Sau khi có được `username` và `password` thì chúng ta sẽ đăng nhập vào trang `admin` và nhiệm vụ chúng ta bây giờ là tải lên webshell php. Và các bước sau đó sẽ được thực hiện giống như các bước: Từ ` B10 -> B19` của `Phương pháp manual` ở trên.
 
-#### 2. Code mô phỏng lỗi <a name="gioithieu"></a>
+#### 2. Code mô phỏng lỗi <a name="mp"></a>
  - Đây là code có lỗi sqli:
  
     ![image](https://user-images.githubusercontent.com/101852647/162029521-874db98a-9d03-4de8-a275-68ac6a233767.png)
     
-#### 3. Code sửa lỗi sqli cho level2 và level1 <a name="gioithieu"></a>
-<br> 3.1 Code sửa lỗi sqli cho level2 <a name="kn"></a></br>
+ - Khi trang web của chúng ta không đảm bảo an toàn chống lại cái Time blind sqli thì rất dễ bị chèn các câu lệnh truy vấn để lấy đi thông tin có trong database như hình bên dưới:
+
+    ![image](https://user-images.githubusercontent.com/101852647/162585582-bd561f37-6f8f-45c6-b576-f48282b8ff14.png)
+    
+#### 3. Code sửa lỗi sqli cho level2 và level1 <a name="lv"></a>
+<br> 3.1 Code sửa lỗi sqli cho level2 <a name="code1"></a></br>
  - Đây là code có lỗi sqli:
  
     ![image](https://user-images.githubusercontent.com/101852647/162029521-874db98a-9d03-4de8-a275-68ac6a233767.png)
     
-<br> 3.2 Code sửa lỗi sqli cho level1 <a name="kn"></a></br>
+ - Để đảm bảo trang web có thể chống lại các câu lệnh truy vấn blind sqli thì chúng ta có thể sử dụng 1 trong những cách sau đây:
+
+  - Sử dụng hàm `sprintf` ghi một chuỗi được định dạng vào một biến.
+
+    ![image](https://user-images.githubusercontent.com/101852647/162586187-859b86aa-b9be-4b7f-977f-a842dc8e5d18.png)
+    
+  - Sử dụng hàm `stripslashes` và hàm `mysqli_real_escape_string` 
+
+    ![image](https://user-images.githubusercontent.com/101852647/162586825-91af4219-00ef-4aad-9060-4fed2bb951a1.png)
+
+<br> 3.2 Code sửa lỗi sqli cho level1 <a name="code2"></a></br>
  - Đây là code có lỗi sqli:
  
     ![image](https://user-images.githubusercontent.com/101852647/162029521-874db98a-9d03-4de8-a275-68ac6a233767.png)
@@ -190,7 +214,10 @@
 
   ![image](https://user-images.githubusercontent.com/101852647/162033367-0b19509e-c019-4b4a-bf11-767c61b56649.png)
 
-
+  <br> 3.3 Các hàm đã sử dụng <a name="chsd"></a></br>
+  - Hàm `sprintf`: ghi một chuỗi được định dạng vào một biến.
+  - hàm `mysqli_real_escape_string()`:Thoát các ký tự đặc biệt trong một chuỗi để sử dụng trong một câu lệnh SQL.
+  - Hàm `stripslashes`: Sẽ loại bỏ dấu chéo ngược.
 
 
 
