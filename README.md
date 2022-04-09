@@ -10,6 +10,9 @@
  
 ### Nội dung báo cáo 
 #### 1. Khai thác sqli level2 <a name="gioithieu"></a>
+<br> 1.1 Phương Pháp manual <a name="kni"></a></br>
+
+<br> 1.2 Phương Pháp sử dụng công cụ sqlmap <a name="kni"></a></br>
  - B1: Sử dụng `netdiscover` để quét Giao thức ARP và nhận các thiết bị trên Mạng LAN Chúng ta có thể thấy rằng IP thứ ba là IP mong muốn và IP thứ hai là IP Kali của chúng ta
  
      ![image](https://user-images.githubusercontent.com/101852647/162161017-e3d3f2d7-7a10-4490-9348-e5ce7c6378fc.png)
