@@ -140,10 +140,16 @@
  - B7: Sau khi có được `username` và `password` thì chúng ta sẽ đăng nhập vào trang `admin` và nhiệm vụ chúng ta bây giờ là tải lên webshell php. Và các bước sau đó sẽ được thực hiện giống như các bước: Từ ` B10 -> B19` của `Phương pháp manual` ở trên.
 
 #### 2. Code mô phỏng lỗi <a name="gioithieu"></a>
-
+ - Đây là code có lỗi sqli:
+ 
+    ![image](https://user-images.githubusercontent.com/101852647/162029521-874db98a-9d03-4de8-a275-68ac6a233767.png)
+    
 #### 3. Code sửa lỗi sqli cho level2 và level1 <a name="gioithieu"></a>
 <br> 3.1 Code sửa lỗi sqli cho level2 <a name="kn"></a></br>
-
+ - Đây là code có lỗi sqli:
+ 
+    ![image](https://user-images.githubusercontent.com/101852647/162029521-874db98a-9d03-4de8-a275-68ac6a233767.png)
+    
 <br> 3.2 Code sửa lỗi sqli cho level1 <a name="kn"></a></br>
  - Đây là code có lỗi sqli:
  
