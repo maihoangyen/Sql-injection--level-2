@@ -1,6 +1,6 @@
  # <div align="center"><p> Sql_injection-level2 </p></div>
  ## Họ và tên: Mai Thị Hoàng Yến
- ## Ngày báo cáo: Ngày 6/4/2022
+ ## Ngày báo cáo: Ngày 10/4/2022
  ### MỤC LỤC
  1. [Khai thác sqli level2](#gioithieu)
  
