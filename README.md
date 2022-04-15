@@ -8,7 +8,7 @@
       
      1.2 [Phương pháp sử dụng sqlmap](#pp)
  
-     1.3 [Phương pháp manual với BurpSuite](#p3)
+     1.3 [Phương pháp sử dụng công cụ BurpSuite](#p3)
      
  2. [Code mô phỏng lỗi](#mp) 
        
@@ -151,7 +151,7 @@
      
  - B7: Sau khi có được `username` và `password` thì chúng ta sẽ đăng nhập vào trang `admin` và nhiệm vụ chúng ta bây giờ là tải lên webshell php. Và các bước sau đó sẽ được thực hiện giống như các bước: Từ ` B10 -> B19` của `Phương pháp manual` ở trên.
 
-<br> 1. Phương Pháp manual với BurpSuite <a name="p3"></a></br>
+<br> 1.3 Phương pháp sử dụng công cụ BurpSuite <a name="p3"></a></br>
  - Đầu tiên chúng ta sẽ sử dụng câu lệnh `'AND sleep (5) #` để xem thử là database đó là Mysql hay database khác nếu đúng thì nó sẽ trì hoãn thời gian là 5s nhưng chỉ đúng với phiên bản >5 còn nhỏ hơn thì chúng ta nên sử dụng hàm BENCHMARK ().
 
      ![image](https://user-images.githubusercontent.com/101852647/163553184-f6346ba9-2ad7-480c-b680-dbe5328c5962.png)
