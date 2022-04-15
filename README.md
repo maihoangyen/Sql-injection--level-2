@@ -162,7 +162,7 @@
 
      ![image](https://user-images.githubusercontent.com/101852647/163554203-a57d2d0d-f461-4d8e-9acf-90c650580569.png)
 
- - Sau khi đã có được tên database thì chúng ta sẽ đi tìm các bảng chứa tên đăng nhập và mật khẩu để chúng ta có thể khai thác dữ liệu bên trong bằng câu lệnh `’ AND (SELECT sleep(5) from information_schema.tables where table_name LIKE ‘%admin%’)=1 #`. Bây giờ chúng ta sẽ tìm các bảng với tên như: admin, login, users và thay đổi tên bằng cách thế vào ‘%admin%’ bằng ‘%users%’ . Nếu tên nào có ký tự khớp với ký tự có trong database nó sẽ trì hoãn 5s.
+ - Sau khi đã có được tên database thì chúng ta sẽ đi tìm các bảng chứa tên đăng nhập và mật khẩu để chúng ta có thể khai thác dữ liệu bên trong bằng câu lệnh `’ AND (SELECT sleep(5) from information_schema.tables where table_name LIKE ‘%admin%’)=1 #`. Bây giờ chúng ta sẽ tìm các bảng với tên như: admin, login, users và thay đổi tên bằng cách thế vào ‘%admin%’ bằng ‘%users%’ . Nếu tên nào có ký tự khớp với ký tự có trong database nó sẽ trì hoãn 5s và ta có được tên bảng cần tìm là: `users`.
 
      ![image](https://user-images.githubusercontent.com/101852647/163554806-b5315d2e-2b23-4241-8477-d7f8199bffd0.png)
 
