@@ -8,6 +8,8 @@
       
      1.2 [Phương pháp sử dụng sqlmap](#pp)
  
+     1.3 [Phương pháp sử dụng sqlmap](#p3)
+     
  2. [Code mô phỏng lỗi](#mp) 
        
  3. [Code sửa lỗi sqli cho level2 và level1](#lv)
@@ -149,6 +151,8 @@
      
  - B7: Sau khi có được `username` và `password` thì chúng ta sẽ đăng nhập vào trang `admin` và nhiệm vụ chúng ta bây giờ là tải lên webshell php. Và các bước sau đó sẽ được thực hiện giống như các bước: Từ ` B10 -> B19` của `Phương pháp manual` ở trên.
 
+<br> 1. Phương Pháp manual với BurpSuite <a name="pp"></a></br>
+ - 
 #### 2. Code mô phỏng lỗi <a name="mp"></a>
  - Đây là code có lỗi sqli:
  
