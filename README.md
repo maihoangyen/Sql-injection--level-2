@@ -155,9 +155,11 @@
  - Đầu tiên chúng ta sẽ sử dụng câu lệnh `'AND sleep (5) #` để xem thử là database đó là Mysql hay database khác nếu đúng thì nó sẽ trì hoãn thời gian là 5s nhưng chỉ đúng với phiên bản >5 còn nhỏ hơn thì chúng ta nên sử dụng hàm BENCHMARK ().
 
      ![image](https://user-images.githubusercontent.com/101852647/163553184-f6346ba9-2ad7-480c-b680-dbe5328c5962.png)
+     
  - Để chắc chắn nó là phiên bản >5 thì chúng ta sử dụng câu lệnh `’ AND IF(substring(VERSION(),1,1) = ‘5’, SLEEP(5), 0)#`
 
-     ![image](https://user-images.githubusercontent.com/101852647/163553518-124a943e-9e24-4471-88fe-31ba3ef6cede.png)
+     ![image](https://user-images.githubusercontent.com/101852647/163558698-1ffc47ea-e79b-4897-9c03-45e80344e96c.png)
+     
  - Bây giờ chúng ta sẽ tìm tên của database bằng câu lệnh `’ AND (SELECT sleep(5) from dual where substring(database(),1,1)=’p’)=1#` và thay đổi `...(database(),1,2)=’h’) ` thì sẽ được tên của database là: `photoblog`
 
      ![image](https://user-images.githubusercontent.com/101852647/163554203-a57d2d0d-f461-4d8e-9acf-90c650580569.png)
