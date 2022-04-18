@@ -212,6 +212,10 @@
   - Sử dụng hàm `stripslashes` và hàm `mysqli_real_escape_string` 
 
     ![image](https://user-images.githubusercontent.com/101852647/162586825-91af4219-00ef-4aad-9060-4fed2bb951a1.png)
+    
+  - Sử dụng những câu lệnh được tham số hóa:
+
+   ![image](https://user-images.githubusercontent.com/101852647/162032811-d4fad498-3119-40e8-bd46-5bbc85a1a1ef.png)
 
 <br> 3.2 Code sửa lỗi sqli cho level1 <a name="code2"></a></br>
  - Đây là code có lỗi sqli:
