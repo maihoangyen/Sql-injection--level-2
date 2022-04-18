@@ -71,7 +71,7 @@
      
       ![image](https://user-images.githubusercontent.com/101852647/162019207-a55f96c2-8164-4143-8378-3fdde4bcaa8f.png)
       
- - B12: Sau đó, ta sử dụng `ExifTool` để liên kết một tệp php độc hại sẽ tạo ra lỗ hổng thực thi mã từ xa. Ta sẽ tải 1 file ảnh với tên là `hy.png` và sao chép nó vào trong file `simple-backdoor.php` từ đường dẫn `/ usr / share / webshells / php `
+ - B12: Sau đó, ta sử dụng `ExifTool` để liên kết một tệp php độc hại sẽ tạo ra lỗ hổng thực thi mã từ xa. Ta sẽ tải 1 file ảnh với tên là `hy.jpg` và sao chép nó vào trong file `simple-backdoor.php` từ đường dẫn `/ usr / share / webshells / php `
 
      ![image](https://user-images.githubusercontent.com/101852647/162161293-29f94981-c5c2-43b6-9f04-384356cc135d.png)
      
