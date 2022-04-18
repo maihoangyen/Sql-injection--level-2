@@ -3,12 +3,6 @@ import time
 import string
 from tabulate import tabulate
 
-'''
-Don't forget that attacking such a vulnerability locally would be easier, since it's faster and the requests not transfer through the network
-and this reduce the possibility of losing data that caused by congested netword and queues overflows 
-
-'''
-
 def PrintTable(head=None, body=None):
 	print(tabulate(body, headers=head, tablefmt="grid"), '\n')
 
