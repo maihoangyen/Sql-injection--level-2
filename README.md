@@ -81,15 +81,15 @@
      
      ![image](https://user-images.githubusercontent.com/101852647/162161553-9a4cfac0-94b9-4367-8ab7-7ffbdc586757.png)
      
- - B13: Bây giờ gõ lệnh cho `ExifTool` để ẩn mã độc của tệp php bên trong hình ảnh png bằng lệnh `exiftool "-comment <= simple-backdoor.php" img.png `
+ - B13: Bây giờ gõ lệnh cho `ExifTool` để ẩn mã độc của tệp php bên trong hình ảnh png bằng lệnh `exiftool "-comment <= simple-backdoor.php" hy.jpg `
 
     ![image](https://user-images.githubusercontent.com/101852647/162161620-1090e1d7-89e5-40f5-8597-f396f6cde245.png)
     
- - B14: Tiếp theo ta sẽ kiểm tra thông tin của hình ảnh bằng lệnh `exiftool img.png`. Như chúng ta có thể quan sát, mã độc được ẩn bên trong hình ảnh
+ - B14: Tiếp theo ta sẽ kiểm tra thông tin của hình ảnh bằng lệnh `exiftool hy.jpg`. Như chúng ta có thể quan sát, mã độc được ẩn bên trong hình ảnh
 
     ![image](https://user-images.githubusercontent.com/101852647/162161675-330d9dc4-1fd6-428b-873c-2f1409dee8dc.png)
     
- - B15:  Bây giờ chúng ta tải ảnh có ẩn mã đọc bên trong lên trang web cũng chính là cái webshell php của chúng ta
+ - B15:  Bây giờ chúng ta tải ảnh có ẩn mã độc bên trong lên trang web cũng chính là cái webshell php của chúng ta
 
     ![image](https://user-images.githubusercontent.com/101852647/162162220-e81d8a25-dc60-4c7e-a61b-3531b8646c3d.png)
     
