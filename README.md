@@ -215,7 +215,7 @@
     
   - Sử dụng những câu lệnh được tham số hóa:
 
-   ![image](https://user-images.githubusercontent.com/101852647/162032811-d4fad498-3119-40e8-bd46-5bbc85a1a1ef.png)
+    ![image](https://user-images.githubusercontent.com/101852647/162032811-d4fad498-3119-40e8-bd46-5bbc85a1a1ef.png)
 
 <br> 3.2 Code sửa lỗi sqli cho level1 <a name="code2"></a></br>
  - Đây là code có lỗi sqli:
